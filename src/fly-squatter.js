@@ -16,11 +16,17 @@ function nextFrame(canvas, fly) {
     fly.timer = Math.max(fly.timer - 1, 0);
 
     const context = canvas.getContext("2d");
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+
+    context.beginPath();
+    context.arc(centerX, centerY, 40, 0, 2 * Math.PI, false);
     context.fillStyle = "#F0F3F8";
-    context.fillRect(0, 0, canvas.width, canvas.height);
-    
     context.fillStyle = fly.timer > 0 ? "#DFC101" : "#687483";
-    context.fillRect(fly.x, fly.y, fly.width, fly.height);
+    
+    context.arc(centerX, centerY, 40, 0, 2 * Math.PI, false);
+
+    context.fill();
     
     window.requestAnimationFrame(() => nextFrame(canvas, fly));
 }
